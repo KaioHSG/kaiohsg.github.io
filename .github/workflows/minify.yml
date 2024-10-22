@@ -1,0 +1,41 @@
+name: minify
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  minify-assets:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout-code
+        uses: actions/checkout@v4
+      
+      # Istalar Node.js.
+      - name: install-nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      # Instalar npm e pacotes necessários. 
+      - name: install-dependencies
+        run: npm install -g html-minifier cssnano-cli uglify-js
+      
+      # Miniaturizar os HTML.
+      - name: minify-html
+        run: find . -name '*.html' -exec sh -c 'html-minifier --collapse-whitespace --remove-comments -o "$1" "$1"' _ {} \;
+      
+      # Miniaturizar os CSS.
+      - name: minify-css
+        run: find . -name '*.css' -exec sh -c 'cssnano "$1" "$1"' _ {} \;
+      
+      # Miniaturizar os JS.
+      - name: minify-js
+        run: find . -name '*.js' -exec sh -c 'uglifyjs "$1" -o "$1" --compress --mangle' _ {} \;
+      
+      - name: deploy-to-github-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          publish_dir: .
