@@ -1,0 +1,122 @@
+body {
+  background: #0a0d14;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  border-radius: 8px;
+  padding: 24px 32px;
+}
+
+.top-nav { display: none; }
+
+h1, h2, h3 { text-shadow: none; letter-spacing: normal; }
+h1 { color: #1a1a2e; font-size: 32px; }
+
+a { color: #0969da; }
+
+.repo-grid {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+.repo-card {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+}
+.repo-card .repo-name { color: #0969da; font-weight: 600; }
+.repo-card .repo-name a { color: #0969da; }
+.repo-card .repo-desc { color: #57606a; }
+.repo-card .repo-meta { color: #6e7681; }
+.repo-card .repo-lang { background: #e8eaed; border: none; border-radius: 3px; color: #57606a; }
+
+#markdown-content {
+  background: #fff;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 16px 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+}
+#markdown-content h1,
+#markdown-content h2 { border-bottom: 1px solid #d0d7de; color: #1a1a2e; }
+#markdown-content h3,
+#markdown-content h4 { color: #1a1a2e; }
+#markdown-content p { color: #24292f; }
+#markdown-content blockquote {
+  border-left: 4px solid #d0d7de;
+  background: #f6f8fa;
+  color: #57606a;
+}
+#markdown-content pre {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+}
+#markdown-content pre code { color: #24292f; }
+#markdown-content :not(pre) > code {
+  background: #e8eaed;
+  border: none;
+  border-radius: 3px;
+  color: #24292f;
+}
+#markdown-content pre.raw-txt {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  color: #24292f;
+  text-shadow: none;
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+}
+#markdown-content img.badge-shields {
+  border: none;
+  box-shadow: none;
+  background: none;
+  padding: 0;
+}
+#markdown-content hr { border-top: 1px solid #d0d7de; }
+
+.repo-header .repo-title { text-shadow: none; color: #1a1a2e; }
+.repo-header .repo-breadcrumb a { color: #57606a; }
+
+.btn {
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  background: #f6f8fa;
+  color: #24292f;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+.btn:hover { background: #e8eaed; border-color: #0969da; }
+.btn-primary { border-color: #1f8838; color: #1f8838; }
+.btn-primary:hover { background: #e8f5e8; }
+.btn-secondary { border-color: #6e7681; color: #6e7681; }
+
+.release-section {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+}
+.release-section h3 { color: #1a1a2e; text-shadow: none; }
+.release-item { border-bottom: 1px solid #e8eaed; }
+.release-item .release-tag { color: #0969da; }
+.release-item .release-name { color: #24292f; }
+.release-item .release-date { color: #6e7681; }
+.release-item .release-asset-link {
+  border: 1px solid #d0d7de;
+  border-radius: 4px;
+  background: #f6f8fa;
+  color: #24292f;
+}
+.release-item .release-asset-link:hover { background: #e8eaed; border-color: #0969da; }
+
+.repo-footer a { color: #6e7681; }
+#loading { color: #57606a; }
+#error h1 { color: #d73a49; text-shadow: none; }
+
+footer { display: none; }

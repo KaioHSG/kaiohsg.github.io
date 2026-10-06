@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title>Repos — KaioHSG.Dev</title>
+  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <link rel="icon" href="/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.1/marked.min.js"></script>
+  <style>body { opacity: 0; }</style>
+</head>
+<body>
+  <div id="container">
+    <div class="top-nav">
+      <a href="/">⌂ Home</a>
+      <span class="top-nav-sep">|</span>
+      <a href="/repos/">Repos</a>
+      <span class="top-nav-sep">|</span>
+      <a href="https://github.com/KaioHSG">GitHub</a>
+    </div>
+
+    <div id="loading">
+      <p>Loading repositories…</p>
+      <p><span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></p>
+    </div>
+
+    <div id="error" class="hidden">
+      <h1>:(</h1>
+      <p>Could not load data from GitHub.</p>
+      <a href="./" class="btn-retro">Try again</a>
+    </div>
+
+    <div id="repo-list" class="hidden">
+      <h1 style="text-align:center;">Repos</h1>
+      <p class="subtitle" style="text-align:center;">Projects, experiments &amp; random stuff on GitHub</p>
+      <div class="repo-grid"></div>
+    </div>
+
+    <div id="repo-view" class="hidden">
+      <div class="repo-header">
+        <p class="repo-breadcrumb"><a href="./">← All repos</a></p>
+        <h1 class="repo-title"></h1>
+        <div class="repo-actions"></div>
+      </div>
+
+      <div id="markdown-content"></div>
+
+      <div class="release-section hidden">
+        <h3>📦 Releases</h3>
+        <div class="release-list"></div>
+      </div>
+
+      <p class="repo-footer"><a href="./">← Back to all repos</a></p>
+    </div>
+
+    <footer>
+      <p><a href="/copypasta.txt">2026 Kaio HSG</a></p>
+    </footer>
+  </div>
+
+  <script src="md-to-html.js"></script>
+</body>
+</html>

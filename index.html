@@ -1,26 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="index, follow">
-    <meta name="description" content='Não, não sou um furry. Só um cara preguiçoso que usa a mesma foto de perfil desde 2017, e achava lobos "maneiros".'>
-    <title>KaioHSG.Dev</title>
-    <link rel="stylesheet" href="/src/css/reset.css">
-    <link rel="stylesheet" href="/src/css/kaiohsg.css">
-    <link rel="icon" href="/src/img/kaiohsg-icon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Não, não sou um furry. Só um cara preguiçoso que usa a mesma foto de perfil desde 2017, e achava lobos maneiros.">
+  <title>KaioHSG.Dev</title>
+  
+  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="icon" href="/favicon.ico">
 </head>
 <body>
-    <div id="content">
-        <h1>Olá, eu sou o Kaio! 👋</h1>
-        <h2>Bem vindo ao meu site!</h2>
-        <ul>
-            <li><a href="https://github.com/KaioHSG">💻 GitHub</a></li>
-            <li><a href="mailto:contato@kaiohsg.dev">✉️ Email</a></li>
-        </ul>
+  <div id="container">
+    <div class="marquee-wrapper">
+      <div class="marquee-text rainbow">>> SEJA BEM-VINDO AO MEU SITE !!! <<</div>
     </div>
+
+    <hr>
+
+    <h1>K A I O H S G . D E V</h1>
+
+    <div class="construction">
+      <span class="construction-icon">🚧</span>
+      <span class="construction-text">🚨 Cuidado! Página em construção. Use capacete. 🚨</span>
+    </div>
+
+    <hr>
+
+    <div id="content">
+      <h2>Olá, eu sou o Kaio! 👋</h2>
+      <p>Este é a <strong>minha caverna</strong> na internet. 🐺</p>
+      <p>E não, não sou um furry. Só um cara preguiçoso que usa a mesma foto de perfil desde 2017, e achava lobos <em>"maneiros"</em>.</p>
+
+      <ul class="nav-links">
+        <li><a href="/repos/">[ Repos ]</a></li>
+        <li><a href="https://github.com/KaioHSG">[ GitHub ]</a></li>
+        <li><a href="mailto:contato@kaiohsg.dev">[ E-mail ]</a></li>
+      </ul>
+    </div>
+
+    <div class="visitor-counter">
+      <span>Visitantes desde 2026:</span>
+      <span class="number" id="counter">000042</span>
+      <span class="blink">█</span>
+    </div>
+
+    <div class="badges">
+      <a class="badge" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener">Vídeo muito incrível!!!</a>
+      <a class="badge" href="https://github.com/KaioHSG/kaiohsg.github.io" target="_blank" rel="noopener">Hospedado no GitHub</a>
+    </div>
+
+    <p id="guestbook">✉️ <a href="mailto:contato@kaiohsg.dev">Mande um e-mail</a> — guestbook virtual</p>
+
     <footer>
-        <p><a href="/copypasta.txt" id="kaiohsg">2025 Kaio HSG</a></p>
+      <p><a href="/copypasta.txt" id="kaiohsg">2026 Kaio HSG</a></p>
     </footer>
+  </div>
+
+  <script>
+    document.getElementById('counter').textContent = String(Math.floor(42000 + Math.random() * 9000)).padStart(6, '0');
+    if (document.referrer) {
+      document.getElementById('counter').textContent = String(Math.floor(43000 + Math.random() * 12000)).padStart(6, '0');
+    }
+  </script>
 </body>
 </html>
