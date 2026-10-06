@@ -9,7 +9,10 @@ function getParams() {
   const qs = window.location.search.replace(/^\?/, '');
   if (!qs) return {};
   if (!qs.includes('=')) {
-    return { repo: decodeURIComponent(qs) };
+    const value = decodeURIComponent(qs);
+    const slash = value.indexOf('/');
+    if (slash === -1) return { repo: value };
+    return { repo: value.substring(0, slash), file: value.substring(slash + 1) };
   }
   const p = {};
   qs.split('&').forEach(pair => {
@@ -18,15 +21,6 @@ function getParams() {
     const v = kv.length > 1 ? decodeURIComponent(kv.slice(1).join('=')) : '';
     p[k] = v;
   });
-  if (!p.repo) {
-    for (const k in p) {
-      if (!['file', 'repo', 'q', 'lang', 'sort'].includes(k)) {
-        p.repo = k;
-        delete p[k];
-        break;
-      }
-    }
-  }
   return p;
 }
 
@@ -48,14 +42,33 @@ function showError(msg) {
   show('error');
 }
 
-// ── whitelist ──
+// ── whitelist / blacklist ──
 function isFileAllowed(path) {
   if (!path || path === '') return false;
   if (path.includes('..')) return false;
+  if (CONFIG.allowedExtensions.length > 0) {
+    const dot = path.lastIndexOf('.');
+    if (dot === -1) return false;
+    const ext = path.substring(dot).toLowerCase();
+    if (!CONFIG.allowedExtensions.includes(ext)) return false;
+  }
+  return true;
+}
+
+function isFileExcluded(path) {
+  if (!path || CONFIG.excludeExtensions.length === 0) return false;
   const dot = path.lastIndexOf('.');
   if (dot === -1) return false;
   const ext = path.substring(dot).toLowerCase();
-  return CONFIG.allowedExtensions.includes(ext);
+  return CONFIG.excludeExtensions.includes(ext);
+}
+
+function getLangForExtension(path) {
+  if (!path) return '';
+  const dot = path.lastIndexOf('.');
+  if (dot === -1) return '';
+  const ext = path.substring(dot).toLowerCase();
+  return CONFIG.extensionToLang[ext] || ext.substring(1);
 }
 
 function isRepoShown(name) {

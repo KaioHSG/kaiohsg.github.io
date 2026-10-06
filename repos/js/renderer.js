@@ -10,7 +10,9 @@ function createRenderer(repo, branch, file) {
         .replace(/<[^>]*>/g, '')
         .replace(/[^\w\s-]/g, '')
         .replace(/\s+/g, '-');
-      return `<h${level} id="${slug}">${text}</h${level}>`;
+      const url = './?' + encodeURIComponent(repo) + (file ? '/' + encodeURIComponent(file) : '') + '#' + slug;
+      const anchor = `<a class="heading-anchor" href="${url}" onclick="event.preventDefault();var h=document.getElementById('${slug}');if(h)h.scrollIntoView({behavior:'smooth'});history.replaceState(null,'','${url}');">🔗</a>`;
+      return `<h${level} id="${slug}">${anchor}${text}</h${level}>`;
     },
 
     link(href, title, text) {
@@ -31,7 +33,7 @@ function createRenderer(repo, branch, file) {
           return `<a href="${href}">${text}</a>`;
         }
         const a = anchor ? '#' + anchor : '';
-        return `<a href="./?repo=${encodeURIComponent(repo)}&file=${encodeURIComponent(resolved)}${a}">${text}</a>`;
+        return `<a href="./?${encodeURIComponent(repo)}/${encodeURIComponent(resolved)}${a}">${text}</a>`;
       }
       return `<a href="${href}">${text}</a>`;
     },

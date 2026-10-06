@@ -133,10 +133,17 @@ async function loadRepoView(repoName, fileName) {
   contentEl.innerHTML = '';
   releaseSection.classList.add('hidden');
 
-  if (fileName && !isFileAllowed(fileName)) {
+  if (fileName && (!isFileAllowed(fileName) || isFileExcluded(fileName))) {
+    let reason = '';
+    if (!isFileAllowed(fileName) && CONFIG.allowedExtensions.length > 0) {
+      reason = `Only ${CONFIG.allowedExtensions.join(', ')} files can be viewed.`;
+    }
+    if (isFileExcluded(fileName)) {
+      reason = `File type ${fileName.substring(fileName.lastIndexOf('.')).toLowerCase()} is excluded.`;
+    }
     contentEl.innerHTML = `<p style="color:#aaffaa;text-align:center;padding:30px 0;">
-      File type not allowed. Only ${CONFIG.allowedExtensions.join(', ')} README files can be viewed.<br>
-      <a href="./?repo=${encodeURIComponent(repoName)}">← Show README</a></p>`;
+      ${reason}<br>
+      <a href="./?${encodeURIComponent(repoName)}">← Show README</a></p>`;
     titleEl.textContent = repoName + ' — blocked';
     show('repo-view');
     return;
@@ -173,7 +180,10 @@ async function loadRepoView(repoName, fileName) {
     actionsEl.appendChild(copyBtn);
 
     if (repo.description) {
+      const existingDesc = header.querySelector('.repo-desc');
+      if (existingDesc) existingDesc.remove();
       const d = document.createElement('p');
+      d.className = 'repo-desc';
       d.style.cssText = 'font-size:13px;margin:6px 0;';
       d.textContent = repo.description;
       header.appendChild(d);
@@ -184,12 +194,17 @@ async function loadRepoView(repoName, fileName) {
       const releases = await cachedApiGet(`/repos/${USER}/${encodeURIComponent(repoName)}/releases?per_page=5`);
       if (releases && releases.length > 0) {
         releaseSection.classList.remove('hidden');
+        const releasesHref = './?' + encodeURIComponent(repoName) + (currentFile ? '/' + encodeURIComponent(currentFile) : '') + '#releases';
         const releasesBtn = document.createElement('a');
-        releasesBtn.href = `${repoUrl}/releases`;
-        releasesBtn.target = '_blank';
-        releasesBtn.rel = 'noopener';
+        releasesBtn.href = releasesHref;
         releasesBtn.className = 'btn btn-secondary';
         releasesBtn.textContent = '📦 Releases';
+        releasesBtn.onclick = (e) => {
+          e.preventDefault();
+          const section = document.getElementById('releases');
+          if (section) section.scrollIntoView({ behavior: 'smooth' });
+          history.replaceState(null, '', releasesHref);
+        };
         actionsEl.appendChild(releasesBtn);
 
         for (const rel of releases) {
@@ -215,12 +230,19 @@ async function loadRepoView(repoName, fileName) {
       }
     } catch (_) {}
 
-    // fetch file
+    // scroll para releases se a hash for #releases
+    if (window.location.hash === '#releases') {
+      const relSection = document.getElementById('releases');
+      if (relSection) {
+        setTimeout(() => relSection.scrollIntoView({ behavior: 'smooth' }), 100);
+      }
+    }
     let content = null;
     let actualFile = fileName;
 
     if (!actualFile) {
-      for (const ext of CONFIG.allowedExtensions) {
+      const readmeCandidates = CONFIG.allowedExtensions.length > 0 ? CONFIG.allowedExtensions : ['.md', '.txt', '.markdown'];
+      for (const ext of readmeCandidates) {
         const candidate = 'README' + ext;
         try {
           content = await rawFetch(`${RAW_BASE}/${encodeURIComponent(repoName)}/${currentBranch}/${candidate}`);
@@ -238,17 +260,64 @@ async function loadRepoView(repoName, fileName) {
 
     if (content) {
       const dot = actualFile.lastIndexOf('.');
-      const isTxt = dot !== -1 && actualFile.substring(dot).toLowerCase() === '.txt';
-      if (isTxt) {
-        contentEl.innerHTML = `<pre class="raw-txt">${escapeHtml(content)}</pre>`;
-      } else {
+      const ext = dot !== -1 ? actualFile.substring(dot).toLowerCase() : '';
+      const isMd = ext === '.md';
+
+      if (isMd) {
         contentEl.innerHTML = marked.parse(content, {
           renderer: createRenderer(repoName, currentBranch, actualFile)
         });
-        try {
-          contentEl.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
-        } catch (_) {}
+      } else {
+        const lang = getLangForExtension(actualFile);
+        contentEl.innerHTML = `<pre><code class="language-${lang}">${escapeHtml(content)}</code></pre>`;
       }
+      try {
+        contentEl.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+      } catch (_) {}
+
+      // ── CSS para heading-anchor e copy-btn ──
+      if (!document.getElementById('repo-ui-style')) {
+        const style = document.createElement('style');
+        style.id = 'repo-ui-style';
+        style.textContent = `
+          .heading-anchor { text-decoration:none; color:#888; opacity:0; transition:opacity .1s; margin-right:4px; }
+          h1:hover .heading-anchor, h2:hover .heading-anchor, h3:hover .heading-anchor,
+          h4:hover .heading-anchor, h5:hover .heading-anchor, h6:hover .heading-anchor { opacity:1; }
+          .code-block { position:relative; }
+          .copy-btn {
+            position:absolute; top:4px; right:4px; z-index:10;
+            background:#222; color:#0f0; border:1px solid #555;
+            border-radius:4px; cursor:pointer; font-size:12px; padding:2px 6px;
+            line-height:1; opacity:0; transition:opacity .15s;
+          }
+          pre:hover .copy-btn,
+          .code-block:hover .copy-btn { opacity:1; }
+        `;
+        document.head.appendChild(style);
+      }
+
+      // ── botão copiar nos blocos de código ──
+      contentEl.querySelectorAll('pre').forEach(pre => {
+        if (pre.parentElement?.classList.contains('code-block')) return;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'code-block';
+        const btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.textContent = '📋';
+        btn.onclick = async () => {
+          try {
+            await navigator.clipboard.writeText(pre.querySelector('code')?.textContent || pre.textContent);
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = '📋'; }, 2000);
+          } catch (_) {
+            btn.textContent = '✗';
+            setTimeout(() => { btn.textContent = '📋'; }, 2000);
+          }
+        };
+        pre.parentElement.insertBefore(wrapper, pre);
+        wrapper.appendChild(btn);
+        wrapper.appendChild(pre);
+      });
     } else {
       const displayName = fileName || 'README';
       contentEl.innerHTML = `<p style="color:#aaffaa;font-style:italic;text-align:center;padding:30px 0;">
