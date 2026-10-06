@@ -2,6 +2,19 @@ html {
   cursor: url('data:image/x-icon;base64,AAACAAMAEAAGAAwAAAMAAcAAMAAAACAAABAAQAAAAAAAAAAGBgYAwAAAAAAAoAAAoA'), auto;
 }
 
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --star-animation: scroll-bg 120s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --star-animation: none; }
+}
+@media (max-width: 640px) {
+  :root { --star-animation: none; }
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1 }
   50% { opacity: 0 }
@@ -31,6 +44,12 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (max-width: 640px) {
+  body { font-size: 15px; overflow-x: auto; }
 }
 
 body::before {
@@ -53,7 +72,7 @@ body::before {
     734px 56px 0 #fff, 34px 789px 0 #fff, 801px 234px 0 #fff,
     89px 856px 0 #fff, 867px 12px 0 #fff, 56px 923px 0 #fff,
     945px 178px 0 #fff, 23px 998px 0 #fff;
-  animation: scroll-bg 120s linear infinite;
+  animation: var(--star-animation);
 }
 
 .blink {
@@ -73,11 +92,16 @@ body::before {
   box-shadow: 0 0 20px #ff00ff44, 0 0 40px #00ffff44;
 }
 
+@media (max-width: 640px) {
+  #container { max-width: 100%; margin: 8px auto; padding: 6px; border-width: 3px; }
+}
+
 hr {
   border: 2px ridge #ffaa00;
   width: 80%;
   margin: 15px auto;
 }
+@media (max-width: 640px) { hr { width: 90%; } }
 
 .marquee-wrapper {
   background: #000033;
@@ -109,6 +133,8 @@ h1 {
   margin: 15px 0;
   letter-spacing: 2px;
 }
+@media (max-width: 640px) { h1 { font-size: 28px; margin: 10px 0; letter-spacing: 0; } }
+@media (max-width: 480px) { h1 { font-size: 22px; } }
 
 h2 {
   font-size: 28px;
@@ -117,6 +143,8 @@ h2 {
   text-shadow: 1px 1px 0 cyan;
   margin: 10px 0;
 }
+@media (max-width: 640px) { h2 { font-size: 20px; } }
+@media (max-width: 480px) { h2 { font-size: 17px; } }
 
 h1 a, h2 a {
   color: inherit;
@@ -137,6 +165,7 @@ h1 a:hover, h2 a:hover {
   display: inline-block;
   animation: blink 0.5s step-end infinite;
 }
+@media (max-width: 640px) { .construction-icon { font-size: 32px; } }
 
 .construction-text {
   display: block;
@@ -156,6 +185,7 @@ h1 a:hover, h2 a:hover {
   display: inline-block;
   margin: 8px;
 }
+@media (max-width: 640px) { .nav-links li { display: block; margin: 6px; } }
 
 .nav-links a {
   display: inline-block;
@@ -169,6 +199,8 @@ h1 a:hover, h2 a:hover {
   text-shadow: 1px 1px 2px #000;
   transition: none;
 }
+@media (max-width: 640px) { .nav-links a { padding: 12px 16px; font-size: 18px; min-height: 44px; } }
+@media (max-width: 480px) { .nav-links a { padding: 14px 12px; font-size: 16px; } }
 
 .nav-links a:hover {
   border-color: #ffff00;
@@ -190,6 +222,7 @@ h1 a:hover, h2 a:hover {
   font-family: 'Courier New', monospace;
   font-size: 16px;
 }
+@media (max-width: 640px) { .visitor-counter { font-size: 13px; } }
 
 .visitor-counter .number {
   color: #ff0000;
@@ -197,6 +230,7 @@ h1 a:hover, h2 a:hover {
   font-size: 20px;
   letter-spacing: 3px;
 }
+@media (max-width: 640px) { .visitor-counter .number { font-size: 16px; } }
 
 .badges {
   text-align: center;
@@ -214,6 +248,7 @@ h1 a:hover, h2 a:hover {
   color: #aaa;
   text-decoration: none;
 }
+@media (max-width: 640px) { .badge { font-size: 10px; padding: 3px 6px; } }
 
 .badge:hover {
   background: #333;
@@ -231,6 +266,8 @@ h1 a:hover, h2 a:hover {
   margin: 10px 0;
   color: #aaffaa;
 }
+@media (max-width: 640px) { #content p { font-size: 15px; } }
+@media (max-width: 480px) { #content p { font-size: 14px; } }
 
 #content a {
   color: #ffcc00;
@@ -255,6 +292,7 @@ footer {
   font-size: 13px;
   color: #666;
 }
+@media (max-width: 640px) { footer { font-size: 11px; padding: 6px; } }
 
 footer a {
   color: #ff66ff;
@@ -276,17 +314,18 @@ footer a:hover {
   width: 16px;
   background: #000022;
 }
-
 ::-webkit-scrollbar-track {
   background: #000022;
   border: 1px inset #333;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #ff6600;
   border: 1px outset #ffaa00;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: #ff0000;
+}
+
+@supports (scrollbar-width: thin) {
+  * { scrollbar-width: thin; scrollbar-color: #ff6600 #000022; }
 }

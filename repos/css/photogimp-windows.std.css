@@ -1,0 +1,265 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background: #f6f8fa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 20px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+#container {
+  max-width: 960px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  padding: 24px 32px;
+}
+
+a { color: #0969da; }
+a:hover { color: #054da3; }
+
+h1, h2, h3 { color: #1a1a2e; }
+h1 { font-size: 28px; font-weight: 600; margin: 0 0 12px; }
+h2 { font-size: 22px; font-weight: 600; margin: 0 0 10px; }
+h3 { font-size: 18px; font-weight: 600; margin: 0 0 8px; }
+
+/* ── nav bar ── */
+.top-nav {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 14px;
+}
+.top-nav a { color: #0969da; }
+.top-nav a:hover { color: #054da3; }
+.top-nav-sep { color: #d0d7de; margin: 0 6px; }
+
+/* ── loading / error ── */
+#loading { text-align: center; padding: 40px 20px; color: #6e7681; }
+.loading-dot { animation: dot-pulse 1.2s ease-in-out infinite; display: inline-block; }
+.loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.loading-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dot-pulse {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1.2); }
+}
+#error { text-align: center; padding: 40px 20px; }
+#error h1 { font-size: 42px; color: #d73a49; margin-bottom: 10px; }
+#error p { color: #6e7681; font-size: 16px; margin-bottom: 16px; }
+.btn-retro {
+  display: inline-block;
+  padding: 8px 20px;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  background: #f6f8fa;
+  color: #0969da;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* ── repo grid ── */
+.repo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+.repo-card {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+.repo-card:hover { border-color: #0969da; }
+.repo-card .repo-name { font-size: 16px; font-weight: 600; color: #0969da; margin-bottom: 6px; }
+.repo-card .repo-name a { color: #0969da; }
+.repo-card .repo-desc { font-size: 13px; color: #1a1a2e; margin-bottom: 8px; line-height: 1.4; }
+.repo-card .repo-meta { font-size: 12px; color: #6e7681; display: flex; flex-wrap: wrap; gap: 6px; }
+.repo-card .repo-lang {
+  display: inline-block;
+  background: #e8eaed;
+  border-radius: 3px;
+  padding: 1px 6px;
+  font-size: 11px;
+  color: #57606a;
+}
+.repo-card .repo-stars { color: #d29922; }
+.subtitle { color: #6e7681; font-size: 14px; margin-bottom: 24px; }
+#repo-list h1 { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
+
+/* ── filter bar ── */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+#repo-search {
+  width: 100%;
+  max-width: 320px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  color: #24292f;
+  outline: none;
+  box-sizing: border-box;
+}
+#repo-search::placeholder { color: #6e7681; }
+#repo-search:focus { border-color: #0969da; box-shadow: 0 0 0 2px #0969da44; }
+#filter-lang, #filter-sort {
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  color: #24292f;
+  outline: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+#filter-lang:focus, #filter-sort:focus { border-color: #0969da; box-shadow: 0 0 0 2px #0969da44; }
+#repo-count { text-align: center; font-size: 13px; color: #6e7681; margin: 10px 0 0; }
+#repo-count.hidden { display: none; }
+
+/* ── repo view ── */
+.repo-header {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #d0d7de;
+}
+.repo-header .repo-breadcrumb { font-size: 13px; color: #6e7681; margin-bottom: 6px; }
+.repo-header .repo-breadcrumb a { color: #6e7681; }
+.repo-header .repo-breadcrumb a:hover { color: #0969da; }
+.repo-header .repo-title { font-size: 26px; font-weight: 600; color: #1a1a2e; margin: 0; }
+.repo-header .repo-actions { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+
+.btn {
+  display: inline-block;
+  padding: 6px 16px;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  background: #f6f8fa;
+  color: #24292f;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { background: #e8eaed; border-color: #0969da; }
+.btn-primary { border-color: #1f8838; color: #1f8838; }
+.btn-secondary { border-color: #6e7681; color: #6e7681; }
+
+/* ── releases ── */
+.release-section {
+  margin: 14px 0;
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 12px 16px;
+}
+.release-section h3 { font-size: 15px; font-weight: 600; color: #1a1a2e; margin-bottom: 8px; }
+.release-item { padding: 6px 0; border-bottom: 1px solid #e8eaed; }
+.release-item:last-child { border-bottom: none; }
+.release-item .release-tag { color: #0969da; font-weight: 600; font-family: monospace; }
+.release-item .release-name { color: #1a1a2e; font-size: 13px; }
+.release-item .release-date { color: #6e7681; font-size: 11px; }
+.release-item .release-asset-link {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid #d0d7de;
+  border-radius: 4px;
+  background: #f6f8fa;
+  font-size: 11px;
+  color: #24292f;
+  margin: 1px 3px 1px 0;
+  font-family: monospace;
+  text-decoration: none;
+}
+.release-item .release-asset-link:hover { background: #e8eaed; border-color: #0969da; }
+
+/* ── markdown content ── */
+#markdown-content {
+  background: #fff;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin-top: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+}
+#markdown-content h1 {
+  font-size: 26px; font-weight: 600; border-bottom: 1px solid #d0d7de;
+  padding-bottom: 6px; margin-top: 0; color: #1a1a2e;
+}
+#markdown-content h2 {
+  font-size: 20px; font-weight: 600; border-bottom: 1px solid #d0d7de;
+  padding-bottom: 4px; margin: 24px 0 12px; color: #1a1a2e;
+}
+#markdown-content h3 { font-size: 17px; font-weight: 600; margin: 18px 0 10px; color: #1a1a2e; }
+#markdown-content h4 { font-size: 15px; font-weight: 600; margin: 14px 0 8px; color: #1a1a2e; }
+#markdown-content p { margin: 10px 0; line-height: 1.7; color: #24292f; }
+#markdown-content ul, #markdown-content ol { padding-left: 24px; margin: 10px 0; }
+#markdown-content li { margin-bottom: 4px; color: #24292f; }
+#markdown-content blockquote {
+  border-left: 4px solid #d0d7de; padding: 8px 16px;
+  margin: 10px 0; color: #57606a; background: #f6f8fa;
+}
+#markdown-content pre {
+  background: #f6f8fa; border: 1px solid #d0d7de;
+  border-radius: 6px; padding: 16px; overflow-x: auto; font-size: 14px;
+}
+#markdown-content pre code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  color: #24292f;
+}
+#markdown-content :not(pre) > code {
+  background: #e8eaed; padding: 2px 6px; border-radius: 4px;
+  font-size: 14px; font-family: monospace; color: #24292f;
+}
+#markdown-content img { max-width: 100%; border-radius: 6px; margin: 10px 0; }
+#markdown-content table { border-collapse: collapse; margin: 10px 0; }
+#markdown-content th, #markdown-content td {
+  border: 1px solid #d0d7de; padding: 6px 12px;
+}
+#markdown-content th { background: #f6f8fa; }
+#markdown-content hr { border: none; border-top: 1px solid #d0d7de; margin: 20px 0; }
+#markdown-content a { color: #0969da; }
+#markdown-content a:hover { color: #054da3; }
+#markdown-content pre.raw-txt {
+  background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px;
+  color: #24292f; font-family: 'Courier New', Consolas, monospace;
+  font-size: 14px; line-height: 1.4; padding: 16px;
+  white-space: pre-wrap; word-wrap: break-word;
+}
+
+.repo-footer { text-align: center; margin-top: 14px; }
+.repo-footer a { color: #6e7681; }
+.repo-footer a:hover { color: #0969da; }
+
+/* ── mobile ── */
+@media (max-width: 640px) {
+  body { padding: 10px; }
+  #container { padding: 12px; }
+  .top-nav { font-size: 14px; padding: 6px; }
+  .top-nav a { display: inline-block; padding: 8px; min-height: 44px; }
+  .repo-grid { grid-template-columns: 1fr; gap: 10px; }
+  .repo-card { padding: 10px; }
+  .repo-card .repo-name { font-size: 15px; }
+  .repo-card .repo-desc { font-size: 12px; }
+  #markdown-content { padding: 12px; }
+  #markdown-content h1 { font-size: 20px; }
+  #markdown-content h2 { font-size: 17px; }
+  #markdown-content pre { font-size: 12px; padding: 10px; }
+  #markdown-content table { font-size: 13px; display: block; overflow-x: auto; white-space: nowrap; }
+  .btn { padding: 10px 14px; font-size: 13px; min-height: 44px; }
+  .release-item .release-asset-link { padding: 4px 8px; font-size: 12px; min-height: 44px; }
+}

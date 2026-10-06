@@ -11,12 +11,12 @@
   <link rel="icon" href="/favicon.ico">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.1/marked.min.js"></script>
-  <style>body { opacity: 0; }</style>
+  <style>body { opacity: 0; } .hidden { display: none !important; }</style>
 </head>
 <body>
   <div id="container">
     <div class="top-nav">
-      <a href="/">⌂ Home</a>
+      <a href="/">Home</a>
       <span class="top-nav-sep">|</span>
       <a href="/repos/">Repos</a>
       <span class="top-nav-sep">|</span>
@@ -37,7 +37,18 @@
     <div id="repo-list" class="hidden">
       <h1 style="text-align:center;">Repos</h1>
       <p class="subtitle" style="text-align:center;">Projects, experiments &amp; random stuff on GitHub</p>
+      <div class="filter-bar">
+        <input type="text" id="repo-search" placeholder="Search repos..." autocomplete="off">
+        <select id="filter-lang"><option value="">All languages</option></select>
+        <select id="filter-sort">
+          <option value="updated">Recent</option>
+          <option value="stars">Most stars</option>
+          <option value="forks">Most forks</option>
+          <option value="name">Name A–Z</option>
+        </select>
+      </div>
       <div class="repo-grid"></div>
+      <p id="repo-count" class="hidden"></p>
     </div>
 
     <div id="repo-view" class="hidden">
@@ -62,6 +73,10 @@
     </footer>
   </div>
 
-  <script src="md-to-html.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

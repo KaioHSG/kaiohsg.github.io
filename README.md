@@ -21,29 +21,32 @@ num repo público que o site já renderiza.
 ## URLs
 
 ```text
-/                                      → Homepage retrô
-/repos/                                → Lista de repositórios
-/repos/?gguard                         → README do repo (formato curto)
-/repos/?repo=gguard&file=GG-Script.md  → Arquivo específico
-/repos/?ezcab&file=README.txt          → TXT renderizado raw
+/                                       → Homepage retrô
+/repos/                                 → Lista de repositórios
+/repos/?gguard                          → README do repo (formato curto)
+/repos/?repo=gguard&file=GG-Script.md   → Arquivo específico
+/repos/?ezcab&file=README.txt           → TXT renderizado raw
 ```
 
 ## Estrutura
 
 ```text
 /
-├── index.html                        Homepage Web 1.0
-├── assets/css/global.css             Tema retrô (estrelas, neon, marquee)
+├── assets/css/global.css     Tema retrô (estrelas, neon, marquee)
 ├── repos/
-│   ├── index.html                    Estrutura do navegador
-│   ├── style.css                     Tema retrô adaptado pros repos
-│   ├── md-to-html.js                 Motor: GitHub API + Markdown
-│   └── css/
-│       ├── reset.css                 Zera o tema retrô (base neutra)
-│       └── {repo}.css                CSS customizado por repositório
+│   ├── css/
+│   │   ├── reset.css         Zera o tema retrô (base neutra)
+│   │   └── {repo}.css        CSS customizado por repositório
+│   ├── index.html            Estrutura do navegador
+│   ├── md-to-html.js         Motor: GitHub API + Markdown
+│   └── style.css             Tema retrô adaptado pros repos
+├── 404-icon.ico
 ├── 404.html
+├── CNAME
+├── copypasta.txt
 ├── favicon.ico
-└── CNAME                             → kaiohsg.dev
+├── index.html                Homepage Web 1.0
+└── README.md
 ```
 
 ## Configuração
@@ -64,8 +67,18 @@ Crie um arquivo em `repos/css/{nome-do-repo}.css`. Exemplo:
 
 ```css
 /* repos/css/photogimp-windows.css */
-body { background: #fff; font-family: sans-serif; }
-#container { max-width: 900px; margin: 0 auto; background: #fff; border-radius: 8px; }
+
+body {
+  background: #fff;
+  font-family: sans-serif;
+}
+
+#container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 8px;
+}
 ```
 
 Se o arquivo existir, o JS carrega **`reset.css`** primeiro (zera o tema retrô) e depois o CSS do repo. Se não existir, o tema retrô padrão é mantido.

@@ -15,6 +15,10 @@
 .top-nav a { color: #ffcc00; text-decoration: underline; }
 .top-nav a:hover { color: #ff6600; }
 .top-nav-sep { color: #555; margin: 0 6px; }
+@media (max-width: 640px) {
+  .top-nav { font-size: 14px; padding: 6px; }
+  .top-nav a { display: inline-block; padding: 8px; min-height: 44px; }
+}
 
 /* ── loading spinner ── */
 #loading { text-align: center; padding: 40px 20px; color: #aaffaa; }
@@ -267,3 +271,69 @@
 }
 
 .hidden { display: none !important; }
+
+/* ── filter bar ── */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+#repo-search {
+  width: 100%;
+  max-width: 320px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  background: #000033;
+  border: 2px ridge #ff6600;
+  color: #33ff33;
+  outline: none;
+  box-sizing: border-box;
+}
+#repo-search::placeholder { color: #88aaff; }
+#repo-search:focus { border-color: #ff00ff; }
+#filter-lang, #filter-sort {
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: 'Courier New', monospace;
+  background: #000033;
+  border: 2px ridge #ff6600;
+  color: #33ff33;
+  outline: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+#filter-lang:focus, #filter-sort:focus { border-color: #ff00ff; }
+#filter-lang option, #filter-sort option { background: #000033; color: #33ff33; }
+#repo-count { text-align: center; font-size: 13px; color: #88aaff; margin: 10px 0 0; }
+#repo-count.hidden { display: none; }
+
+/* ── mobile ── */
+@media (max-width: 640px) {
+  #repo-list { margin: 4px; }
+  #repo-list h1 { font-size: 22px; }
+  .subtitle { font-size: 12px; }
+  .repo-grid { grid-template-columns: 1fr; gap: 10px; }
+  .repo-card { padding: 10px; }
+  .repo-card .repo-name { font-size: 15px; }
+  .repo-card .repo-desc { font-size: 12px; }
+  .repo-card .repo-meta { font-size: 11px; }
+  #repo-view { margin: 4px; }
+  .repo-header .repo-title { font-size: 20px; }
+  .repo-header .repo-breadcrumb { font-size: 12px; }
+  .btn { padding: 10px 14px; font-size: 13px; min-height: 44px; }
+  #markdown-content { padding: 12px; }
+  #markdown-content h1 { font-size: 20px; }
+  #markdown-content h2 { font-size: 17px; }
+  #markdown-content h3 { font-size: 15px; }
+  #markdown-content pre { font-size: 12px; padding: 10px; }
+  #markdown-content table { font-size: 13px; display: block; overflow-x: auto; white-space: nowrap; }
+  .release-section { padding: 8px 10px; }
+  .release-item .release-asset-link { padding: 4px 8px; font-size: 12px; min-height: 44px; }
+}
+
+@supports (scrollbar-width: thin) {
+  * { scrollbar-width: thin; scrollbar-color: #ff6600 #000022; }
+}
