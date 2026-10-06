@@ -1,23 +1,3 @@
-█████████████████████████████████████████
-         ██                                    ██
-         ██   K A I O H S G . D E V           ██
-         ██                                    ██
-         ██   WWW 2.0 REVIVAL                  ██
-         ██   ◙ HTML5  ◙ CSS3  ◙ NEON         ██
-         ██                                    ██
-         █████████████████████████████████████████
-
-```
- ╔═══╗
- ║  ║  ╔═══╗         ╔═══╗     ╔═══════════╗
- ║  ║  ║   ║         ║   ║     ║           ║
- ║  ╚══╝   ╠═════════╣   ║     ║  WELCOME  ║
- ║         ║         ║   ║     ║    TO MY   ║
- ║  ╔═══╗  ║  ╔══════╝   ╚═════╝   WEBSITE  ║
- ║  ║   ║  ║  ║                           ║
- ╚══╝   ╚══╝  ╚══════════════════════════════╝
-```
-
 # KaioHSG.Dev
 
 > **Bem-vindo ao meu pedaço da internet desde 2025.**
@@ -80,12 +60,6 @@ const CONFIG = {
   allowedRepos: [],            // [] = todos; ou ["repo1", "repo2"]
   excludeRepos: [],            // repos ocultos da listagem
   allowedExtensions: ['.md', '.txt'],
-  shields: {                   // estilo global dos badges shields.io
-    style: 'plastic'
-  },
-  repoCSS: {                   // CSS customizado por repositório
-    'gguard': ':root { --shields-color: 00ff00; }'
-  }
 };
 ```
 
@@ -113,22 +87,11 @@ repoCSS: {
 
 ### 📬 Contato
 
-```
+```text
 ✉️ contato@kaiohsg.dev
 💻 github.com/KaioHSG
 ```
 
----
-
-```
-   ____________________________________________________
-  |                                                    |
-  |   Este site funciona melhor no Netscape 4.0+      |
-  |   e foi testado em Internet Explorer, Firefox,     |
-  |   Chrome e até no Lynx (se você souber o que é).   |
-  |____________________________________________________|
-```
-
 <p align="center">
-  <sub>Feito com ❤️ desde 2025 • KaioHSG</sub>
+  Feito com ❤️ desde 2026 • KaioHSG
 </p>
