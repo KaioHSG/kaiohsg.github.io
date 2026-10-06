@@ -1,57 +1,52 @@
-# KaioHSG.Dev
+# K A I O H S G . D E V
 
-> **Bem-vindo ao meu pedaço da internet desde 2025.**
->
-> Um site pessoal com estética **Web 1.0** — border ridge, marquee, neon, Comic Sans,
-> fundo estrelado e aquele cheirinho de internet discada.
+Um site pessoal com estética **Web 1.0** — border ridge, marquee, neon, Comic Sans,
+fundo estrelado e aquele cheirinho de internet discada.
 
-### ✨ Sobre
+Cada repositório vira uma página automaticamente. Basta escrever um `README.md`
+num repo público que o site já renderiza.
 
-Este repositório é o código-fonte do meu site hospedado via **GitHub Pages**.
-A ideia é simples: em vez de manter um site estático chato, cada repositório
-meu vira uma página automaticamente. Basta escrever um `README.md` que o site
-faz o resto.
+## Features
 
-### 🚀 Features
+- **🏠 Homepage** retrô com estrelas, marquee, badges e contador de visitas
+- **📂 Repos** — lista dinâmica de todos os repositórios via GitHub API (cacheada)
+- **📖 Leitor de README** — renderiza qualquer `.md` ou `.txt` de qualquer repo
+- **📦 Releases** — botões de download pros assets das releases
+- **🎨 CSS por repo** — cada repositório pode ter seu próprio tema via `repos/css/{nome}.css`
+- **🔄 Reset automático** — `reset.css` zera o tema retrô pra quem tem CSS customizado
+- **🏷️ Badges shields.io** — parametrizáveis via CSS custom properties (`--shields-style`, `--shields-color`)
+- **🔗 Links curtos** — `kaiohsg.dev/repos/?gguard` (sem `repo=`)
+- **📄 TXT raw** — arquivos `.txt` são renderizados como texto puro em `<pre>`
 
-| Feature | Descrição |
-|---------|-----------|
-| **🏠 Homepage** | Tema GeoCities retrô com estrelas, badges e contador de visitas |
-| **📂 Repos** | Lista dinâmica de todos os repositórios via API do GitHub |
-| **📖 Leitor de README** | Renderiza qualquer `.md`/`.txt` de qualquer repo |
-| **📦 Releases** | Botões de download direto pros assets das releases |
-| **🎨 CSS por repo** | Cada repositório pode ter seu próprio CSS customizado |
-| **🏷️ Badges shields.io** | Com suporte a estilo retrô via CSS custom properties |
-| **🔗 Links curtos** | `kaiohsg.dev/repos/?gguard` (sem `repo=`) |
+## URLs
 
-### 🌐 Como funciona
-
-```
-kaiohsg.dev                          → Homepage retrô
-kaiohsg.dev/repos/                   → Lista de repositórios
-kaiohsg.dev/repos/?gguard           → README do gguard
-kaiohsg.dev/repos/?gguard&file=docs/guide.md  → Arquivo específico
-kaiohsg.dev/qualquer-coisa          → 404 estilizado
+```text
+/                                      → Homepage retrô
+/repos/                                → Lista de repositórios
+/repos/?gguard                         → README do repo (formato curto)
+/repos/?repo=gguard&file=GG-Script.md  → Arquivo específico
+/repos/?ezcab&file=README.txt          → TXT renderizado raw
 ```
 
-### 📁 Estrutura
+## Estrutura
 
-```
+```text
 /
-├── index.html               ★ Homepage Web 1.0
-├── assets/
-│   └── css/
-│       └── global.css       ★ Tema retrô (fundo estrelado, neon, marquee)
+├── index.html                        Homepage Web 1.0
+├── assets/css/global.css             Tema retrô (estrelas, neon, marquee)
 ├── repos/
-│   ├── index.html           ★ Estrutura do navegador de repos
-│   ├── style.css            ★ CSS retrô adaptado pros repos
-│   └── md-to-html.js        ★ Motor: GitHub API + renderizador Markdown
-├── 404.html                 ★ Página de erro temática
+│   ├── index.html                    Estrutura do navegador
+│   ├── style.css                     Tema retrô adaptado pros repos
+│   ├── md-to-html.js                 Motor: GitHub API + Markdown
+│   └── css/
+│       ├── reset.css                 Zera o tema retrô (base neutra)
+│       └── {repo}.css                CSS customizado por repositório
+├── 404.html
 ├── favicon.ico
-└── CNAME                    → kaiohsg.dev
+└── CNAME                             → kaiohsg.dev
 ```
 
-### ⚙️ Configuração
+## Configuração
 
 No topo do `repos/md-to-html.js`:
 
@@ -63,35 +58,67 @@ const CONFIG = {
 };
 ```
 
-### 🎭 Personalização por repo
+## CSS por repositório
 
-Cada repositório pode ter seu próprio CSS via `CONFIG.repoCSS`:
+Crie um arquivo em `repos/css/{nome-do-repo}.css`. Exemplo:
 
-```js
-repoCSS: {
-  'meu-repo-aqui': `
-    .repo-title { color: #ff00ff; text-shadow: 0 0 20px #f0f; }
-    :root { --shields-style: flat; --shields-color: ffcc00; }
-  `
+```css
+/* repos/css/photogimp-windows.css */
+body { background: #fff; font-family: sans-serif; }
+#container { max-width: 900px; margin: 0 auto; background: #fff; border-radius: 8px; }
+```
+
+Se o arquivo existir, o JS carrega **`reset.css`** primeiro (zera o tema retrô) e depois o CSS do repo. Se não existir, o tema retrô padrão é mantido.
+
+## Shields.io badges
+
+Controlados por CSS custom properties no `:root`. Dois lugares:
+
+**`repos/style.css`** (tema retrô — padrão):
+
+```css
+:root {
+  --shields-style: plastic;
+  --shields-color: ff00ff;
 }
 ```
 
-### 🛠️ Tech Stack
+**`repos/css/reset.css`** (tema limpo — pra quem tem CSS próprio):
 
-- **HTML5** + **CSS3**
-- **JavaScript** (vanilla)
-- **GitHub REST API v3**
+```css
+:root {
+  --shields-style: flat;
+  --shields-color: none;   /* none = não passa o parâmetro color */
+}
+```
+
+O JS lê essas variáveis do CSS e aplica `?style=...&color=...` na URL do shields.io.  
+Se o valor for `none` ou vazio, o parâmetro não é adicionado.
+
+## API Cache
+
+As chamadas pra GitHub API são cacheadas no `localStorage` por 1 hora pra não
+estourar o rate limit (60 req/h sem token). Dá pra forçar refresh limpando
+o localStorage do navegador.
+
+## Tech Stack
+
+- HTML5 + CSS3
+- JavaScript (vanilla)
+- GitHub REST API v3
 - [marked.js](https://marked.js.org/) — renderizador Markdown
 - [highlight.js](https://highlightjs.org/) — syntax highlighting
 - [shields.io](https://shields.io/) — badges
 
-### 📬 Contato
+## Contato
 
 ```text
 ✉️ contato@kaiohsg.dev
 💻 github.com/KaioHSG
 ```
 
+---
+
 <p align="center">
-  Feito com ❤️ desde 2026 • KaioHSG
+  <sub>Feito com ❤️ desde 2026 • KaioHSG</sub>
 </p>
