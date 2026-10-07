@@ -1,4 +1,4 @@
-// ── chamada direta à API do GitHub ──
+// ── direct GitHub API call ──
 function apiGet(path) {
   return fetch(`${GITHUB_API}${path}`, {
     headers: { Accept: 'application/vnd.github.v3+json' }
@@ -10,7 +10,7 @@ function apiGet(path) {
   });
 }
 
-// ── fetch de arquivo raw ──
+// ── raw file fetch ──
 function rawFetch(url) {
   return fetch(url).then(r => {
     if (!r.ok) throw new Error('NOT_FOUND');
@@ -18,7 +18,7 @@ function rawFetch(url) {
   });
 }
 
-// ── cache localStorage (TTL 1h) ──
+// ── localStorage cache (TTL 1h) ──
 const CACHE_TTL = 60 * 60 * 1000;
 
 function cacheGet(key) {

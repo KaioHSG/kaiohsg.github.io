@@ -6,9 +6,9 @@
   <meta name="robots" content="index, follow">
   <meta name="description" content="Não, não sou um furry. Só um cara preguiçoso que usa a mesma foto de perfil desde 2017, e achava lobos maneiros.">
   <title>KaioHSG.Dev</title>
-  
   <link rel="stylesheet" href="/assets/css/global.css">
   <link rel="icon" href="/favicon.ico">
+  <script src="/repos/repo-tree/ui.js"></script>
 </head>
 <body>
   <div id="container">
@@ -58,9 +58,10 @@
   </div>
 
   <script>
-    document.getElementById('counter').textContent = String(Math.floor(42000 + Math.random() * 9000)).padStart(6, '0');
+    var c = UI.home.counter;
+    document.getElementById('counter').textContent = String(Math.floor(c.base + Math.random() * c.range)).padStart(6, '0');
     if (document.referrer) {
-      document.getElementById('counter').textContent = String(Math.floor(43000 + Math.random() * 12000)).padStart(6, '0');
+      document.getElementById('counter').textContent = String(Math.floor(c.baseRef + Math.random() * c.rangeRef)).padStart(6, '0');
     }
   </script>
 </body>

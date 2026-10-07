@@ -1,10 +1,10 @@
-// ── escape HTML ──
+// ── HTML escape ──
 function escapeHtml(s) {
   if (!s) return '';
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-// ── parser de query string ──
+// ── query string parser ──
 function getParams() {
   const qs = window.location.search.replace(/^\?/, '');
   if (!qs) return {};
@@ -24,7 +24,7 @@ function getParams() {
   return p;
 }
 
-// ── troca de view ──
+// ── view switcher ──
 function show(id) {
   ['loading', 'error', 'repo-list', 'repo-view'].forEach(k => {
     const el = document.getElementById(k);
@@ -32,17 +32,24 @@ function show(id) {
   });
   const el = document.getElementById(id);
   if (el) el.classList.remove('hidden');
-  document.body.style.opacity = '1';
+  document.body.classList.add('loaded');
 }
 
-// ── tela de erro ──
+// ── error screen ──
 function showError(msg) {
   const p = document.querySelector('#error p');
   if (msg) p.textContent = msg;
   show('error');
 }
 
-// ── whitelist / blacklist ──
+// ── smooth scroll to heading anchor ──
+function scrollToHeading(slug, url) {
+  const el = document.getElementById(slug);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+  history.replaceState(null, '', url);
+}
+
+// ── allowlist / blocklist ──
 function isFileAllowed(path) {
   if (!path || path === '') return false;
   if (path.includes('..')) return false;
@@ -77,19 +84,19 @@ function isRepoShown(name) {
   return true;
 }
 
-// ── carregador de CSS por repo ──
+// ── per-repo CSS loader ──
 async function loadRepoCSS(repoName) {
   const encoded = encodeURIComponent(repoName);
   const cssId = 'repo-css';
   const old = document.getElementById(cssId);
   if (old) old.remove();
 
-  const stdResp = await fetch(`css/${encoded}.std.css?t=${Date.now()}`);
+  const stdResp = await fetch('css/' + encoded + '.std.css?t=' + Date.now());
   if (stdResp.ok) {
     const txt = await stdResp.text();
     if (txt.trim()) {
       ['/assets/css/global.css', 'style.css'].forEach(href => {
-        const link = document.querySelector(`link[href="${href}"]`);
+        const link = document.querySelector('link[href="' + href + '"]');
         if (link) link.remove();
       });
       const el = document.createElement('style');
@@ -100,7 +107,7 @@ async function loadRepoCSS(repoName) {
     }
   }
 
-  const ovResp = await fetch(`css/${encoded}.css?t=${Date.now()}`);
+  const ovResp = await fetch('css/' + encoded + '.css?t=' + Date.now());
   if (ovResp.ok) {
     const txt = await ovResp.text();
     if (txt.trim()) {

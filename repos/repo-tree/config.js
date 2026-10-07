@@ -1,9 +1,9 @@
-// ── constantes ──
+// ── constants ──
 const USER = 'KaioHSG';
 const GITHUB_API = 'https://api.github.com';
-const RAW_BASE = `https://raw.githubusercontent.com/${USER}`;
+const RAW_BASE = 'https://raw.githubusercontent.com/' + USER;
 
-// ── configuração ──
+// ── config (backend only) ──
 const CONFIG = {
   allowedRepos: [],
   excludeRepos: [],
@@ -43,7 +43,7 @@ const CONFIG = {
   }
 };
 
-// ── estado global ──
+// ── global state ──
 let currentRepo = null;
 let currentBranch = 'main';
 let currentFile = null;
