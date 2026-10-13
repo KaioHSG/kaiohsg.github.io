@@ -7,8 +7,10 @@
   <meta name="description" content="Não, não sou um furry. Só um cara preguiçoso que usa a mesma foto de perfil desde 2017, e achava lobos maneiros.">
   <title>KaioHSG.Dev</title>
   <link rel="stylesheet" href="/assets/css/global.css">
-  <link rel="icon" href="/favicon.ico">
-  <script src="/repos/repo-tree/ui.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="/assets/img/pixymoji-ico/globe-meridians.ico">
 </head>
 <body>
   <div id="container">
@@ -21,27 +23,27 @@
     <h1>K A I O H S G . D E V</h1>
 
     <div class="construction">
-      <span class="construction-icon">🚧</span>
-      <span class="construction-text">🚨 Cuidado! Página em construção. Use capacete. 🚨</span>
+      <span class="construction-icon"><img src="/assets/img/pixymoji-png/warning.png" alt="" class="emoji-big"></span>
+      <span class="construction-text"><img src="/assets/img/pixymoji-png/police-car-light.png" alt="" class="emoji-inline"> Cuidado! Página em construção. Use capacete. <img src="/assets/img/pixymoji-png/police-car-light.png" alt="" class="emoji-inline"></span>
     </div>
 
     <hr>
 
     <div id="content">
-      <h2>Olá, eu sou o Kaio! 👋</h2>
-      <p>Este é a <strong>minha caverna</strong> na internet. 🐺</p>
+      <h2>Olá, eu sou o Kaio! <img src="/assets/img/pixymoji-png/waving-hand.png" alt="" class="emoji-inline"></h2>
+      <p>Este é a <strong>minha caverna</strong> na internet. <img src="/assets/img/pixymoji-png/dog-face.png" alt="" class="emoji-inline"></p>
       <p>E não, não sou um furry. Só um cara preguiçoso que usa a mesma foto de perfil desde 2017, e achava lobos <em>"maneiros"</em>.</p>
 
       <ul class="nav-links">
-        <li><a href="/repos/">[ Repos ]</a></li>
+        <li><a href="https://kaiohsg.dev/repo-tree/">[ Repo Tree ]</a></li>
         <li><a href="https://github.com/KaioHSG">[ GitHub ]</a></li>
         <li><a href="mailto:contato@kaiohsg.dev">[ E-mail ]</a></li>
       </ul>
     </div>
 
     <div class="visitor-counter">
-      <span>Visitantes desde 2026:</span>
-      <span class="number" id="counter">000042</span>
+      <span>Visitantes desde 2004:</span>
+      <span class="number" id="counter">040012</span>
       <span class="blink">█</span>
     </div>
 
@@ -50,7 +52,7 @@
       <a class="badge" href="https://github.com/KaioHSG/kaiohsg.github.io" target="_blank" rel="noopener">Hospedado no GitHub</a>
     </div>
 
-    <p id="guestbook">✉️ <a href="mailto:contato@kaiohsg.dev">Mande um correio elêtronico!</a></p>
+    <p id="guestbook"><img src="/assets/img/pixymoji-png/speech-balloon.png" alt="" class="emoji-inline"> <a href="mailto:contato@kaiohsg.dev">Mande um correio elêtronico!</a></p>
 
     <footer>
       <p><a href="/copypasta.txt" id="kaiohsg">2026 Kaio HSG</a></p>
@@ -58,10 +60,9 @@
   </div>
 
   <script>
-    var c = UI.home.counter;
-    document.getElementById('counter').textContent = String(Math.floor(c.base + Math.random() * c.range)).padStart(6, '0');
+    document.getElementById('counter').textContent = String(Math.floor(42000 + Math.random() * 9000)).padStart(6, '0');
     if (document.referrer) {
-      document.getElementById('counter').textContent = String(Math.floor(c.baseRef + Math.random() * c.rangeRef)).padStart(6, '0');
+      document.getElementById('counter').textContent = String(Math.floor(43000 + Math.random() * 12000)).padStart(6, '0');
     }
   </script>
 </body>
