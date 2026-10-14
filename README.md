@@ -1,4 +1,4 @@
-# [ \[ KaioHSG.Dev \] ](https://kaiohsg.dev)
+# [\[ KaioHSG.Dev \]](https://kaiohsg.dev)
 
 > **BEM-VINDO À MINHA CAVERNA NA INTERNET!**
 
