@@ -41,6 +41,7 @@ Não tem build, não tem bundler, não tem framework. É só **HTML puro** (e um
 ├── copypasta.txt        ← Easter egg
 ├── favicon.ico          ← Ícone principal
 ├── index.html           ← Página principal
+├── profile.png          ← Minha foto de perfil
 └── README.md            ← Arquivo que você está lendo
 ```
 
