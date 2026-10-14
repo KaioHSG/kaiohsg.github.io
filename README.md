@@ -4,7 +4,7 @@
 
 Este é o repositório do meu site pessoal, um pedaço da **Web 1.0** preservado em pleno 2026. Espere encontrar:
 
-- 🐺 **Lobos "maneiros"** (sim, a foto de perfil é de 2017)
+- 🐺 **Lobos "maneiros"** (sim, a [foto de perfil](https://kaiohsg.dev/profile.png) é de 2017)
 - 🚧 **Placa de obra** avisando que tá sempre em construção
 - 📟 **Contador de visitantes** fake (ele é meio aleatório)
 - ✉️ **E-mail** pra me mandar correio eletrônico
@@ -32,15 +32,16 @@ Não tem build, não tem bundler, não tem framework. É só **HTML puro** (e um
 ```text
 /
 ├── .github/workflows/static.yml  ← CI do GitHub Pages
-├── assets/css/
-│   └── global.css     ← Todo o estilo
-├── 404-icon.ico       ← Icone da página de erro
-├── 404.html           ← Página de erro personalizada
-├── CNAME              ← Domínio personalizado
-├── copypasta.txt      ← Easter egg
-├── favicon.ico        ← Ícone
-├── index.html         ← Página principal
-└── README.md          ← Arquivo que você está lendo
+├── assets/
+│   ├── css/global.css   ← Todo o estilo
+│   ├── fonts/           ← Pasta de fontes
+│   └── imgs/            ← Pasta de imagens
+├── 404.html             ← Página de erro personalizada
+├── CNAME                ← Domínio personalizado
+├── copypasta.txt        ← Easter egg
+├── favicon.ico          ← Ícone principal
+├── index.html           ← Página principal
+└── README.md            ← Arquivo que você está lendo
 ```
 
 ## 🤝 Contribuindo
